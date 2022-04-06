@@ -11,6 +11,7 @@
         var radius = canvas.height / 2;
         ctx.translate(radius, radius);
         radius = radius * 0.90
+        //Intervalo de actualización
         setInterval(drawClock, 1000);
 
         function drawClock() {
@@ -19,7 +20,7 @@
         }
 
         function drawFace(ctx, radius) {
-
+            //Circulo central estático
             ctx.beginPath();
             ctx.arc(0, 0, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "#D4E0E7";
@@ -47,6 +48,7 @@
         }
 
         function drawHour(ctx, pos, length, width, color) {
+            //Se rota hacia el ángulo que se desea, se pinta y se vuelve a rotar a la posición original
             ctx.beginPath();
             ctx.rotate(pos);
             ctx.arc(0, -length, length, 0, 2 * Math.PI);
@@ -56,7 +58,7 @@
         }
 
         function drawMinute(ctx, pos, length, width, color, radius, hour) {
-
+            //Se traslada a la zona de las horas
             ctx.rotate(hour);
             ctx.translate(0,-radius*0.5);
             ctx.rotate(-hour);
@@ -68,6 +70,7 @@
             ctx.fill();
             ctx.rotate(-pos);
 
+            //Se vuelve al contexto general
             ctx.rotate(hour);
             ctx.translate(0,radius*0.5);
             ctx.rotate(-hour);
@@ -75,7 +78,7 @@
         }
 
         function drawSecond(ctx, pos, length, width, color,radius,hour,minute) {
-
+            //Se traslada hacia la zona de los minutos pasando primero por las horas
             ctx.rotate(hour);
             ctx.translate(0,-radius*0.5);
             ctx.rotate(-hour);
@@ -90,6 +93,7 @@
             ctx.fill();
             ctx.rotate(-pos);
 
+            //Se vuelve al contexto general
             ctx.rotate(minute);
             ctx.translate(0,radius*0.25);
             ctx.rotate(-minute);
